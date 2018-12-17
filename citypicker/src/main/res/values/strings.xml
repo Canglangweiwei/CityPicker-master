@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CityPicker</string>
+    <string name="hint_input_city">请输入城市</string>
+</resources>
