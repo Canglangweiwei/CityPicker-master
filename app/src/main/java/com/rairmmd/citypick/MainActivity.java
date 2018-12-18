@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.rairmmd.citypicker.CityPicker;
 import com.rairmmd.citypicker.CitySelectActivity;
 import com.rairmmd.citypicker.Constants;
 import com.rairmmd.citypicker.bean.CityInfoBean;
@@ -19,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        CityPicker.getInstance().init(this);
         tvResult = findViewById(R.id.tv_result);
     }
 
@@ -31,9 +29,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 200 && resultCode == RESULT_OK) {
-            CityInfoBean cityinfo = data.getParcelableExtra(Constants.CITY_INFO);
-            tvResult.setText(cityinfo.getName());
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+        switch (requestCode) {
+            case 200:
+                CityInfoBean cityinfo = data.getParcelableExtra(Constants.CITY_INFO);
+                tvResult.setText(String.format("城市：%s，编号：%s", cityinfo.getName(), cityinfo.getId()));
+                break;
         }
     }
 }
