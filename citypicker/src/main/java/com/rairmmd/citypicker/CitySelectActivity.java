@@ -23,6 +23,9 @@ import com.rairmmd.citypicker.widget.SideBar;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * 城市选择列表
+ */
 public class CitySelectActivity extends AppCompatActivity {
 
     private EditText mEtCitySearch;
@@ -84,7 +87,7 @@ public class CitySelectActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String cityName = ((SortModel) adapter.getItem(position)).getName();
+                String cityName = adapter.getItem(position).getName();
                 CityInfoBean cityInfoBean = CityInfoBean.findCity(cityListInfo, cityName);
                 Intent intent = new Intent();
                 Bundle bundle = new Bundle();
